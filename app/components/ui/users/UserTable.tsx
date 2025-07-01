@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useUsers } from "@/app/hooks/useUsers";
 import { Pagination } from "@/app/components/ui/Pagination";
 import { useUserStore } from "@/app/stores/userStore";
+import { Button } from "../Button";
 
 export function UserTable({
   initialUsers,
@@ -25,15 +26,12 @@ export function UserTable({
           placeholder="🔍 Buscar por nombre..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded px-4 py-2 w-full sm:w-80 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border px-4 py-2 w-full sm:w-80  border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring focus:ring-blue-400"
         />
 
-        <button
-          onClick={() => setSortAsc(!sortAsc)}
-          className="text-sm px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-        >
+        <Button title="ordenar" onClick={() => setSortAsc(!sortAsc)}>
           Ordenar {sortAsc ? "↑" : "↓"}
-        </button>
+        </Button>
       </div>
 
       <div className="overflow-x-auto">
@@ -62,17 +60,6 @@ export function UserTable({
                 <td className="p-3">{user.email}</td>
                 <td className="p-3">{user.phone}</td>
                 <td className="p-3 text-center flex justify-center items-center gap-3">
-                  <button
-                    title="Ver dirección"
-                    onClick={() =>
-                      alert(
-                        `Dirección: ${user.location.street.number} ${user.location.street.name}`
-                      )
-                    }
-                    className="text-green-600 hover:text-green-800 text-lg transition"
-                  >
-                    📍
-                  </button>
                   <Link
                     title="Ver detalle"
                     href={`/users/${user.login.uuid}`}
@@ -80,13 +67,12 @@ export function UserTable({
                   >
                     🔎
                   </Link>
-                  <button
+                  <Button
                     title="Marcar como favorito"
                     onClick={() => toggleFavorite(user.login.uuid)}
-                    className="text-yellow-500 hover:text-yellow-600 text-lg transition"
                   >
                     {favorites.includes(user.login.uuid) ? "⭐" : "☆"}
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}

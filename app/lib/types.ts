@@ -51,3 +51,7 @@ export interface User {
     catchPhrase: string;
   };
 }
+export interface ThemeContextType {
+  theme: "light" | "dark";
+  toggleTheme: () => void;
+}

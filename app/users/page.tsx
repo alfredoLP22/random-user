@@ -1,5 +1,5 @@
 import { getUsers } from "@/app/lib/api";
-import { UserTable } from "@/app/components/ui/UserTable";
+import { UserTable } from "@/app/components/ui/users/UserTable";
 import { User } from "@/app/lib/types";
 
 export default async function UsersPage({

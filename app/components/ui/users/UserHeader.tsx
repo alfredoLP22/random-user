@@ -4,10 +4,20 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { User } from "@/app/lib/types";
 import { useUserStore } from "@/app/stores/userStore";
+import { useEditableUserStore } from "@/app/stores/editableUserStore";
 
 export function UserHeader({ user }: { user: User }) {
+  const { getUser } = useEditableUserStore();
+  const edited = getUser(user.login.uuid);
+
   const { favorites, toggleFavorite } = useUserStore();
   const [isFav, setIsFav] = useState(false);
+
+  const fullName = edited
+    ? `${edited.firstName} ${edited.lastName}`
+    : `${user.name.first} ${user.name.last}`;
+
+  const email = edited ? edited.email : user.email;
 
   useEffect(() => {
     setIsFav(favorites.includes(user.login.uuid));
@@ -34,9 +44,9 @@ export function UserHeader({ user }: { user: User }) {
       </div>
 
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-800 dark:text-white">
-        {user.name.first} {user.name.last}
+        {fullName}
       </h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
     </div>
   );
 }
