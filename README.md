@@ -15,7 +15,7 @@ Incluye paginación, favoritos, modo oscuro, detalles individuales, formularios 
 ## 📦 Clonar e instalar
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
+git clone https://github.com/alfredoLP22/random-user.git
 cd tu-repo
 
 # Usando npm
